@@ -15,10 +15,10 @@ namespace w1
         static int bilans = 1000;
         public static void Main()
         {
-            Thread t1 = new Thread(new ThreadStart(Odejmij));   // definicja wątku
+            Thread t1 = new Thread(new ThreadStart(Odejmij));   
             t1.Start();
 
-            Thread t2 = new Thread(new ThreadStart(Dodaj));   // definicja wątku
+            Thread t2 = new Thread(new ThreadStart(Dodaj));   
             t2.Start();   
 
             Console.ReadKey();
@@ -26,13 +26,17 @@ namespace w1
 
         public static void Odejmij()
         {
-            for (int j = 0; j < 20; j++)
+
+            for (int k = 0; k < 20; k++)
+
             {
                 Monitor.Enter(obj);
                 if (bilans <= 0)
                     Monitor.Wait(obj);
+
                 bilans -= 100;
                 Console.WriteLine($"Kwota Bilansu po odjęciu {bilans} ");
+
                 Monitor.Exit(obj);
             }
         }
@@ -42,7 +46,7 @@ namespace w1
             for (int i = 0; i < 20; i++)
             {
                 Monitor.Enter(obj);
-                bilans += 100;
+                bilans += 190;
                 if (bilans > 0)
                     Monitor.Pulse(obj);
                 Console.WriteLine($"Kwota bilansu po dodaniu{bilans} ");
