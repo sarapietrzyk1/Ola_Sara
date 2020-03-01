@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace w1
+{
+    // Przykład 1
+
+    public class Program
+    {
+        static object obj = new object();
+        static int bilans = 500;
+        public static void Main()
+        {
+            Thread t1 = new Thread(new ThreadStart(Odejmij));   // definicja wątku
+            t1.Start();
+
+            Thread t2 = new Thread(new ThreadStart(Dodaj));   // definicja wątku
+            t2.Start();   
+
+            Console.ReadKey();
+        }
+
+        public static void Odejmij()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                Monitor.Enter(obj);
+                if (bilans <= 0)
+                    Monitor.Wait(obj);
+                bilans -= 100;
+                Console.WriteLine($"Bilans po odjęciu {bilans} ");
+                Monitor.Exit(obj);
+            }
+        }
+
+        public static void Dodaj()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                Monitor.Enter(obj);
+                bilans += 100;
+                if (bilans > 0)
+                    Monitor.Pulse(obj);
+                Console.WriteLine($"Bilans po dodaniu {bilans} ");
+                Monitor.Exit(obj);
+                
+            }
+        }
+    }
+}
