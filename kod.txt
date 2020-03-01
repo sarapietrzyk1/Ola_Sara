@@ -12,7 +12,7 @@ namespace w1
     public class Program
     {
         static object obj = new object();
-        static int bilans = 500;
+        static int bilans = 1000;
         public static void Main()
         {
             Thread t1 = new Thread(new ThreadStart(Odejmij));   // definicja wątku
