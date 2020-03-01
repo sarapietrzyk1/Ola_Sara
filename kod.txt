@@ -31,7 +31,7 @@ namespace w1
                 Monitor.Enter(obj);
                 if (bilans <= 0)
                     Monitor.Wait(obj);
-                bilans -= 100;
+                bilans -= 5;
                 Console.WriteLine($"Bilans po odjęciu {bilans} ");
                 Monitor.Exit(obj);
             }
@@ -42,7 +42,7 @@ namespace w1
             for (int i = 0; i < 20; i++)
             {
                 Monitor.Enter(obj);
-                bilans += 100;
+                bilans += 190;
                 if (bilans > 0)
                     Monitor.Pulse(obj);
                 Console.WriteLine($"Bilans po dodaniu {bilans} ");
