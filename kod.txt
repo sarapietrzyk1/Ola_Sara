@@ -15,10 +15,10 @@ namespace w1
         static int bilans = 500;
         public static void Main()
         {
-            Thread t1 = new Thread(new ThreadStart(Odejmij));   // definicja wątku
+            Thread t1 = new Thread(new ThreadStart(Odejmij));   
             t1.Start();
 
-            Thread t2 = new Thread(new ThreadStart(Dodaj));   // definicja wątku
+            Thread t2 = new Thread(new ThreadStart(Dodaj));   
             t2.Start();   
 
             Console.ReadKey();
